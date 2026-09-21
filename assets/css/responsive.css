@@ -1,0 +1,575 @@
+/* =========================================================
+   Portfolio -- responsive layout
+
+   Loaded after style.css and animations.css so it can override
+   both. Breakpoints, largest first:
+
+     1200px  narrower desktop  -- 3 projects per row
+      991px  tablet / phone    -- single column, menu becomes an icon bar
+      767px  phone             -- 1 project per row
+      480px  small phone       -- tighter spacing
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   box-sizing fix
+
+   style.css sets box-sizing only on <body>, and it is not
+   inherited. These are the elements that get both a width and
+   horizontal padding in the breakpoints below, so without
+   border-box they would push the page wider than the screen.
+   On desktop they have no horizontal padding, so nothing changes.
+   --------------------------------------------------------- */
+
+.main .container,
+.services .service,
+.education-exprerience .education,
+.education-exprerience .experience {
+    box-sizing: border-box;
+}
+
+
+/* ---------------------------------------------------------
+   <= 1200px  -- narrower desktop
+   --------------------------------------------------------- */
+
+@media (max-width: 1200px) {
+
+    .main .container {
+        gap: 3rem;
+        padding: 0 20px;
+    }
+
+    .main-heading {
+        font-size: 7.2rem;
+        line-height: 7.8rem;
+    }
+
+    .section-heading {
+        font-size: 4.8rem;
+    }
+
+    .main .main-left .menu-info {
+        padding: 28px 28px;
+    }
+
+    .main .main-left .menu-info ul {
+        gap: 32px;
+    }
+
+    .main-right .about-me-secion,
+    .main-right .portfolio-section,
+    .main-right .services-section,
+    .main-right .testimonial-section,
+    .main-right .get-in-touch-section {
+        padding: 36px;
+    }
+
+    .main-right .resume-section {
+        padding: 36px 0 36px 36px;
+    }
+
+    /* 3 projects per row */
+    .tabcontent .portfolios .portfolio-content {
+        width: 32.2%;
+    }
+
+    .portfolio-section .para,
+    .services-section .para,
+    .resume-section .para,
+    .get-in-touch-section .para {
+        width: 80%;
+    }
+
+    .about-me-secion .about-info .about-info-desc .section-heading {
+        width: 80%;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   <= 991px  -- everything stacks, the menu becomes an icon bar
+   --------------------------------------------------------- */
+
+@media (max-width: 991px) {
+
+    /* top padding leaves room for the fixed menu bar and its shadow */
+    .main {
+        padding: 100px 0 60px;
+    }
+
+    /* anchor links must not land underneath the fixed bar */
+    #about,
+    #portfolio,
+    #services,
+    #testimonials,
+    #resume,
+    #contact {
+        scroll-margin-top: 104px;
+    }
+
+    .main .container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 22px;
+        padding: 0 16px;
+    }
+
+    /* the sidebar is no longer a column, so it must not stick */
+    .main .main-left {
+        width: 100%;
+        position: static;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .main .main-right {
+        width: 100%;
+        padding-top: 0;
+    }
+
+    /* ---- menu: icon bar pinned to the top ---- */
+
+    /* Fixed, not sticky: sticky would only hold while .main-left is on
+       screen, and on mobile that is just the name -- the bar would scroll
+       away immediately. Fixed keeps it pinned for the whole page. */
+    .main .main-left .menu-info {
+        position: fixed;
+        top: 10px;
+        left: 16px;
+        right: 16px;
+        z-index: 100;
+        margin: 0;
+        padding: 10px;
+        border-radius: 18px;
+        /* --counter-bg is only 20% opaque, so page content showed through
+           the floating bar. This needs to be solid. */
+        background: #18212c;
+        border: 1px solid rgb(119 167 212 / 16%);
+        box-shadow: 0 8px 22px rgb(0 0 0 / 45%);
+    }
+
+    .main .main-left .menu-info ul {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 4px;
+    }
+
+    .main .main-left .menu-info ul li {
+        flex: 1 1 0;
+        font-size: 0;
+        line-height: 0;
+    }
+
+    /* the dot and the burst belong to the desktop menu only */
+    .main .main-left .menu-info ul li::after,
+    .main .main-left .menu-info ul li::before {
+        display: none;
+    }
+
+    .main .main-left .menu-info ul li a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 44px;
+        border-radius: 12px;
+        color: var(--heading-color);
+        transition:
+            background-color 0.3s var(--ease-out),
+            color 0.3s var(--ease-out);
+    }
+
+    /* hover lift makes no sense on a touch target */
+    .main .main-left .menu-info ul li:hover a {
+        transform: none;
+    }
+
+    .main .main-left .menu-info .menu-icon {
+        display: block;
+        font-size: 17px;
+        line-height: 1;
+    }
+
+    /* the label stays in the markup for screen readers */
+    .main .main-left .menu-info .menu-label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        border: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        clip-path: inset(50%);
+    }
+
+    .main .main-left .menu-info ul li.is-active a {
+        background: rgb(119 167 212 / 18%);
+        color: var(--primary-color);
+    }
+
+    /* ---- hero ---- */
+
+    .sub-heading-one {
+        font-size: 1.8rem;
+    }
+
+    .main-heading {
+        font-size: 6.4rem;
+        line-height: 1.05;
+    }
+
+    .main-heading span {
+        line-height: inherit;
+    }
+
+    /* ---- section shells ---- */
+
+    .main-right .about-me-secion,
+    .main-right .portfolio-section,
+    .main-right .services-section,
+    .main-right .testimonial-section,
+    .main-right .get-in-touch-section,
+    .main-right .resume-section {
+        padding: 28px 22px;
+        border-radius: 18px;
+    }
+
+    .main-right .portfolio-section,
+    .services-section,
+    .resume-section,
+    .get-in-touch-section {
+        margin-top: 26px;
+    }
+
+    .sub-heading-before {
+        font-size: 3.6rem;
+    }
+
+    .sub-heading {
+        margin-top: -26px;
+    }
+
+    .section-heading {
+        font-size: 3.8rem;
+    }
+
+    .portfolio-section .para,
+    .services-section .para,
+    .resume-section .para,
+    .get-in-touch-section .para,
+    .about-me-secion .about-info .about-info-desc .section-heading {
+        width: 100%;
+    }
+
+    /* ---- about ---- */
+
+    .about-me-secion .about-info {
+        flex-direction: column;
+        gap: 22px;
+    }
+
+    .about-me-secion .about-info .about-info-img,
+    .about-me-secion .about-info .about-info-desc {
+        width: 100%;
+    }
+
+    /* the photo has no width of its own, so centre it and stop it
+       from spilling out on narrow phones */
+    .about-me-secion .about-info .about-info-img {
+        text-align: center;
+    }
+
+    .about-me-secion .about-info .about-info-img img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    .about-info-desc-btns {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .about-me-secion .about-counters {
+        flex-direction: column;
+        gap: 26px;
+        padding-top: 40px;
+    }
+
+    .counter-num-heading {
+        gap: 6px;
+    }
+
+    .counter-number {
+        font-size: 5.2rem;
+    }
+
+    .counter-heading {
+        font-size: 2.6rem;
+    }
+
+    /* ---- portfolio ---- */
+
+    /* Filter tabs become one swipeable row instead of wrapping into
+       ragged lines. .tab sets overflow:hidden, so overflow-x is
+       overridden here; the bottom padding leaves room for the glow. */
+    .portfolio-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        gap: 10px;
+        padding: 26px 2px 14px;
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .portfolio-tabs::-webkit-scrollbar {
+        display: none;
+    }
+
+    .tab button {
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        padding: 11px 22px;
+        font-size: 1.6rem;
+        background-color: rgb(119 167 212 / 10%);
+        border-color: rgb(119 167 212 / 35%);
+        color: var(--heading-color);
+    }
+
+    /* a stuck :hover after tapping looks broken on touch screens */
+    .tab button:hover {
+        background-color: rgb(119 167 212 / 10%);
+        color: var(--heading-color);
+    }
+
+    .tab button:active {
+        transform: scale(0.96);
+    }
+
+    .tab button.active,
+    .tab button.active:hover {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+        color: var(--bg-color);
+        box-shadow: 0 4px 14px rgb(119 167 212 / 32%);
+    }
+
+    /* 2 projects per row */
+    .tabcontent .portfolios .portfolio-content {
+        width: 48.7%;
+    }
+
+    /* ---- services: icon + title on one row, text underneath ---- */
+
+    .services-section .services {
+        padding-top: 30px;
+        gap: 20px;
+    }
+
+    .services .service {
+        width: 100%;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 16px;
+        padding: 24px 22px;
+    }
+
+    /* the icon itself is 55px + 16px padding, so the box must not
+       clip it the way the 12% desktop column does */
+    .services .service .service-img {
+        width: auto;
+        flex: none;
+        overflow: visible;
+    }
+
+    .services .service .service-title {
+        width: auto;
+        flex: 1;
+    }
+
+    .services .service .service-desc,
+    .services .service .service-desc .para {
+        width: 100%;
+    }
+
+    .service-heading {
+        font-size: 2.8rem;
+    }
+
+    /* ---- testimonials ---- */
+
+    .testimonial-slider-one {
+        padding: 26px 22px;
+    }
+
+    /* ---- resume ---- */
+
+    .education-exprerience {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .education-exprerience .education,
+    .education-exprerience .experience {
+        width: 100%;
+    }
+
+    .education-exprerience .education {
+        padding-top: 20px;
+    }
+
+    .education-exprerience .experience {
+        border-radius: 18px;
+        padding: 30px 22px;
+    }
+
+    .uni-offices {
+        gap: 26px;
+        padding-top: 30px;
+    }
+
+    /* ---- contact ---- */
+
+    .contact-ifo {
+        flex-direction: column;
+        gap: 12px;
+        padding: 32px 0;
+    }
+
+    .contact-ifo a {
+        text-align: center;
+    }
+
+    .contact-form form {
+        gap: 34px;
+    }
+
+    .contact-form form .form-name,
+    .contact-form form .form-email {
+        width: 100%;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   <= 767px  -- phone
+   --------------------------------------------------------- */
+
+@media (max-width: 767px) {
+
+    .main-heading {
+        font-size: 5.2rem;
+    }
+
+    .section-heading {
+        font-size: 3.2rem;
+    }
+
+    .sub-heading-before {
+        font-size: 3rem;
+    }
+
+    .sub-heading {
+        margin-top: -22px;
+    }
+
+    /* one project per row */
+    .tabcontent .portfolios .portfolio-content {
+        width: 100%;
+    }
+
+    .main-right .about-me-secion,
+    .main-right .portfolio-section,
+    .main-right .services-section,
+    .main-right .testimonial-section,
+    .main-right .get-in-touch-section,
+    .main-right .resume-section {
+        padding: 24px 18px;
+    }
+
+    .counter-number {
+        font-size: 4.8rem;
+    }
+
+    .counter-heading {
+        font-size: 2.4rem;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   <= 480px  -- small phone
+   --------------------------------------------------------- */
+
+@media (max-width: 480px) {
+
+    .main .container {
+        padding: 0 12px;
+    }
+
+    .main-heading {
+        font-size: 4.4rem;
+    }
+
+    .section-heading {
+        font-size: 2.8rem;
+    }
+
+    .sub-heading-before {
+        font-size: 2.6rem;
+    }
+
+    .sub-heading {
+        margin-top: -19px;
+        font-size: 2rem;
+    }
+
+    .para {
+        font-size: 1.6rem;
+    }
+
+    .main {
+        padding-top: 90px;
+    }
+
+    #about,
+    #portfolio,
+    #services,
+    #testimonials,
+    #resume,
+    #contact {
+        scroll-margin-top: 94px;
+    }
+
+    .main .main-left .menu-info {
+        padding: 8px 6px;
+        /* matches the tighter container padding */
+        left: 12px;
+        right: 12px;
+    }
+
+    .main .main-left .menu-info ul li a {
+        height: 40px;
+    }
+
+    .main .main-left .menu-info .menu-icon {
+        font-size: 15px;
+    }
+
+    .services .service {
+        padding: 20px 16px;
+    }
+
+    .education-exprerience .experience {
+        padding: 24px 16px;
+    }
+
+    .contact-ifo a {
+        padding: 14px 20px;
+        font-size: 1.6rem;
+    }
+}

@@ -1,0 +1,81 @@
+{
+    "categories": [
+        "Ecommerce",
+        "Informative",
+        "E-Book"
+    ],
+    "projects": [
+        {
+            "id": "p_seed01",
+            "title": "Ecommerce Store",
+            "category": "Ecommerce",
+            "image": "assets/images/portfolio-1.png",
+            "link": "",
+            "order": 1,
+            "created": "2026-09-04 10:00:00"
+        },
+        {
+            "id": "p_seed02",
+            "title": "Fashion Shop",
+            "category": "Ecommerce",
+            "image": "assets/images/portfolio-2.png",
+            "link": "",
+            "order": 2,
+            "created": "2026-09-04 10:00:01"
+        },
+        {
+            "id": "p_seed03",
+            "title": "Agency Website",
+            "category": "Informative",
+            "image": "assets/images/portfolio-3.png",
+            "link": "",
+            "order": 3,
+            "created": "2026-09-04 10:00:02"
+        },
+        {
+            "id": "p_seed04",
+            "title": "Corporate Landing",
+            "category": "Informative",
+            "image": "assets/images/portfolio-4.png",
+            "link": "",
+            "order": 4,
+            "created": "2026-09-04 10:00:03"
+        },
+        {
+            "id": "p_seed05",
+            "title": "E-Book Cover",
+            "category": "E-Book",
+            "image": "assets/images/portfolio-5.png",
+            "link": "",
+            "order": 5,
+            "created": "2026-09-04 10:00:04"
+        },
+        {
+            "id": "p_seed06",
+            "title": "Digital Guide",
+            "category": "E-Book",
+            "image": "assets/images/portfolio-6.png",
+            "link": "",
+            "order": 6,
+            "created": "2026-09-04 10:00:05"
+        },
+        {
+            "id": "p_63d253a38334",
+            "title": "Align A Pull",
+            "category": "Ecommerce",
+            "image": "uploads/projects/20260903-18d9c7a8b3.png",
+            "link": "https://alignapull.com/",
+            "order": 7,
+            "created": "2026-09-03 23:39:00"
+        },
+        {
+            "id": "p_d6b12f39e467",
+            "title": "Apex Vita Labs",
+            "category": "Ecommerce",
+            "image": "uploads/projects/20260903-ad9602e0e7.png",
+            "link": "https://apexvitalabs.com/",
+            "order": 8,
+            "created": "2026-09-03 23:57:50"
+        }
+    ]
+}

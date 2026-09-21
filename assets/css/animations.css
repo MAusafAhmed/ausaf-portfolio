@@ -1,0 +1,340 @@
+/* =========================================================
+   Portfolio -- animations
+   Every animation lives in this file. Tweak things here --
+   there is no need to touch style.css.
+   ========================================================= */
+
+:root {
+    --ease-out: cubic-bezier(0.22, 0.61, 0.36, 1);
+    --reveal-time: 0.75s;
+}
+
+
+/* ---------------------------------------------------------
+   1. REVEAL -- base
+   JS adds the "js-anim" class to <html>. With JS disabled these
+   rules never apply, so the content shows normally.
+   --------------------------------------------------------- */
+
+.js-anim [data-reveal] {
+    opacity: 0;
+    transform: translateY(32px);
+    transition:
+        opacity var(--reveal-time) var(--ease-out),
+        transform var(--reveal-time) var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js-anim [data-reveal="left"] {
+    transform: translateX(-42px);
+}
+
+.js-anim [data-reveal="right"] {
+    transform: translateX(42px);
+}
+
+.js-anim [data-reveal="zoom"] {
+    transform: translateY(24px) scale(0.94);
+}
+
+/* the timeline's vertical line -- draws itself from top to bottom */
+.js-anim [data-reveal="line"] {
+    opacity: 1;
+    transform: scaleY(0);
+    transform-origin: top center;
+    transition: transform 1.1s var(--ease-out);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+
+.js-anim [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+}
+
+
+/* ---------------------------------------------------------
+   2. LEFT SIDEBAR -- sticky + menu
+   --------------------------------------------------------- */
+
+.main .container {
+    align-items: flex-start;
+}
+
+.main .main-left {
+    position: sticky;
+    top: 60px;
+}
+
+.main .main-left .menu-info ul li a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+}
+
+.main .main-left .menu-info ul li:hover a {
+    color: var(--primary-color);
+    transform: translateX(6px);
+}
+
+/* The icon is only used by the collapsed mobile menu */
+.main .main-left .menu-info .menu-icon {
+    display: none;
+}
+
+.main .main-left .menu-info ul li::after {
+    transition:
+        background-color 0.35s var(--ease-out),
+        transform 0.35s var(--ease-out);
+}
+
+.main .main-left .menu-info ul li.is-active a {
+    color: var(--primary-color);
+}
+
+/* The active item swaps its dot for a radial burst.
+   Dot and burst are separate pseudo-elements so they can cross-fade. */
+.main .main-left .menu-info ul li::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 90%;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+    background: repeating-conic-gradient(from 0deg,
+            var(--primary-color) 0deg 3.4deg,
+            transparent 3.4deg 10deg);
+    -webkit-mask-image: radial-gradient(closest-side, transparent 24%, #000 38%, #000 90%, transparent 100%);
+    mask-image: radial-gradient(closest-side, transparent 24%, #000 38%, #000 90%, transparent 100%);
+    transition:
+        opacity 0.4s var(--ease-out),
+        transform 0.5s var(--ease-out);
+}
+
+.main .main-left .menu-info ul li.is-active::before {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* the plain dot shrinks away underneath the burst */
+.main .main-left .menu-info ul li.is-active::after {
+    transform: translate(-50%, -50%) scale(0);
+}
+
+/* smooth scroll + heading section ke top par na chipke */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+#about,
+#portfolio,
+#services,
+#testimonials,
+#resume,
+#contact {
+    scroll-margin-top: 40px;
+}
+
+
+/* ---------------------------------------------------------
+   3. ABOUT -- skill buttons
+   --------------------------------------------------------- */
+
+.about-info-desc-btns a {
+    transition:
+        transform 0.35s var(--ease-out),
+        background-color 0.35s var(--ease-out);
+}
+
+.about-info-desc-btns a:hover {
+    transform: translateY(-4px);
+    background-color: rgb(119 167 212 / 30%);
+}
+
+.about-info-desc-btns a img {
+    transition: transform 0.45s var(--ease-out);
+}
+
+.about-info-desc-btns a:hover img {
+    transform: rotate(-12deg) scale(1.15);
+}
+
+
+/* ---------------------------------------------------------
+   4. PORTFOLIO
+   the panel-level fadeIn is disabled -- the cards now come in one by one
+   --------------------------------------------------------- */
+
+.js-anim .tabcontent.active {
+    animation: none;
+}
+
+.tab button {
+    transition:
+        background-color 0.3s var(--ease-out),
+        color 0.3s var(--ease-out),
+        transform 0.3s var(--ease-out);
+}
+
+.tab button:hover {
+    transform: translateY(-3px);
+}
+
+/* the overlay text slides up from below */
+.portfolio-overlay > * {
+    opacity: 0;
+    transform: translateY(14px);
+    transition:
+        opacity 0.4s var(--ease-out),
+        transform 0.4s var(--ease-out);
+}
+
+.portfolio-content .portfolio-item:hover .portfolio-overlay > *,
+.portfolio-content .portfolio-item:focus-visible .portfolio-overlay > * {
+    opacity: 1;
+    transform: none;
+}
+
+.portfolio-content .portfolio-item:hover .portfolio-overlay > *:nth-child(2),
+.portfolio-content .portfolio-item:focus-visible .portfolio-overlay > *:nth-child(2) {
+    transition-delay: 0.08s;
+}
+
+
+/* ---------------------------------------------------------
+   5. SERVICES
+   --------------------------------------------------------- */
+
+.services .service {
+    transition:
+        transform 0.4s var(--ease-out),
+        background-color 0.4s var(--ease-out);
+}
+
+.services .service:hover {
+    transform: translateY(-8px);
+    background-color: rgb(61 89 117 / 45%);
+}
+
+.services .service .service-img img {
+    transition:
+        transform 0.5s var(--ease-out),
+        border-color 0.4s var(--ease-out);
+}
+
+.services .service:hover .service-img img {
+    transform: rotate(-10deg) scale(1.1);
+    border-color: var(--primary-color);
+}
+
+.services .service .service-heading {
+    transition: color 0.35s var(--ease-out);
+}
+
+.services .service:hover .service-heading {
+    color: var(--heading-color);
+}
+
+
+/* ---------------------------------------------------------
+   6. RESUME
+   --------------------------------------------------------- */
+
+.uni-offices .btns-info .btn-info .sun button {
+    transition:
+        background-color 0.35s var(--ease-out),
+        transform 0.35s var(--ease-out);
+}
+
+.uni-offices .btns-info .btn-info:hover .sun button {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+    transform: translateX(4px);
+}
+
+
+/* ---------------------------------------------------------
+   7. CONTACT
+   --------------------------------------------------------- */
+
+.contact-ifo a {
+    transition:
+        transform 0.35s var(--ease-out),
+        background-color 0.35s var(--ease-out),
+        color 0.35s var(--ease-out);
+}
+
+.contact-ifo a:hover {
+    transform: translateY(-4px);
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+}
+
+/* on focus, the line under the input fills from left to right */
+.contact-form form .form-name,
+.contact-form form .form-email,
+.contact-form form .form-subject,
+.contact-form form .form-message {
+    position: relative;
+}
+
+.contact-form form .form-name::after,
+.contact-form form .form-email::after,
+.contact-form form .form-subject::after,
+.contact-form form .form-message::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 0;
+    background: var(--primary-color);
+    transition: width 0.45s var(--ease-out);
+}
+
+.contact-form form .form-name:focus-within::after,
+.contact-form form .form-email:focus-within::after,
+.contact-form form .form-subject:focus-within::after,
+.contact-form form .form-message:focus-within::after {
+    width: 100%;
+}
+
+.contact-form form .form-submit button {
+    transition:
+        filter 0.25s var(--ease-out),
+        transform 0.3s var(--ease-out),
+        box-shadow 0.3s var(--ease-out);
+}
+
+.contact-form form .form-submit button:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgb(119 167 212 / 25%);
+}
+
+
+/* ---------------------------------------------------------
+   8. For visitors who have reduced motion enabled
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .js-anim [data-reveal],
+    .js-anim [data-reveal].is-visible {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        transition-duration: 0.001ms !important;
+    }
+}
